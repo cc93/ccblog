@@ -18,11 +18,11 @@ app.set('view engine', 'jade');
 
 //全局中间件 app.all
 //设置跨域访问, app.all是对所有http请求方法(get/post/put/delete)添加中间件(就是配置上相同的一套操作),第一个参数'*'表示匹配所有的url
-app.all('*', function(req, res, next) {
+app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By",' 3.2.1');
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By", ' 3.2.1');
     // res.header("Content-Type", "application/json;charset=utf-8");
     next();
 });
@@ -32,7 +32,7 @@ app.all('*', function(req, res, next) {
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 // session 中间件
 app.use(session({
@@ -50,29 +50,31 @@ app.use(session({
 app.use(flash());
 
 
-//托管静态文件,以供index.html引用(css,js等)或提供资源文件给客户端下载
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/downloads',express.static(path.join(__dirname, 'downloads')));
+//设置静态文件目录
+// public: html, css, js 等页面文件
+// downloads: 供客户端下载的资源文件
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/downloads', express.static(path.join(__dirname, 'downloads')));
 
 //路由
 require('./routes')(app);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
