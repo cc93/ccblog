@@ -8,13 +8,21 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var config = require('config-lite');
+var mongoose = require('mongoose');
+
+//连接数据库
+mongoose.connect(config.mongodb,function(err){
+    if(err) return new Error(err)
+    console.log('mongodb connect ok!');
+});
 
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
+
 
 //全局中间件 app.all
 //设置跨域访问, app.all是对所有http请求方法(get/post/put/delete)添加中间件(就是配置上相同的一套操作),第一个参数'*'表示匹配所有的url
@@ -31,8 +39,8 @@ app.all('*', function (req, res, next) {
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({extended: false})); // for parsing application/x-www-form-urlencoded
 app.use(cookieParser());
 // session 中间件
 app.use(session({

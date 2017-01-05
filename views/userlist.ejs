@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../public/css/bootstrap.css">
+    <title><%= title %></title>
+</head>
+<body>
+<div class="container">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">User List</div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>username</th>
+                <th>email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>hnlichong</td>
+                <td>543281892@qq.com</td>
+            </tr>
+            <tr>
+                <td>hnlichong1</td>
+                <td>54328189211@qq.com</td>
+            </tr>
+            <% for(var i = 0;i < users.length;i++){ %>
+            <tr>
+                <td><%= users[i].username %></td>
+                <td><%= users[i].email %></td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>

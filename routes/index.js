@@ -1,7 +1,7 @@
 var express = require('express');
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        res.redirect('/posts');
+        res.render('signup', {title: '科幻世界'});
     });
     app.use('/signup', require('./signup'));
     app.use('/signin', require('./signin'));
@@ -21,11 +21,11 @@ module.exports = function (app) {
     app.get('/dupont2', function (req, res) {
         res.redirect('/public/dupont');
     });
-    //路由方式三（好）：app.use(path, 中间件) 使用中间件，建立客户端访问地址和相应的主机静态文件目录的映射关系，这样发送到客户端的html文件的当前目录指向的就是主机的静态文件目录，也就是客户端通过此链接访问到了服务器主机的局部内容（静态资源目录下的所有内容）。 如： gladcc.com/dupont3 加载的是 __dirname + '/../public/dupont/index.html'    gladcc.com/dupont3/css/base.css 加载的是 __dirname + '/../public/dupont/css/base.css'
+    //路由方式三（好）：app.use(path, 中间件) 使用中间件，建立客户端访问地址和相应的主机静态文件目录的映射关系，这样发送到客户端的html文件的当前目录指向的就是主机的静态文件目录，也就是客户端通过此链接访问到了服务器主机的局部内容（静态资源目录下的所有内容）。 如： gladcc.com/dupont3 加载的是 __dirname + '/../public/dupont/index.ejs'    gladcc.com/dupont3/css/base.css 加载的是 __dirname + '/../public/dupont/css/base.css'
     app.use('/dupont3', express.static(__dirname + '/../public/dupont/'));
 
     //newborn
-    app.get('/newborn', function (req, res) {
-        res.sendFile('./public/newborn/index.html', {root: __dirname + '/../'});
-    });
+    app.use('/newborn', express.static(__dirname + '/../public/newborn/'));
+
+
 };
