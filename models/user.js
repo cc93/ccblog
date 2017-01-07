@@ -13,7 +13,17 @@ var SALT_WORK_FACTOR = 10; //加盐强度
 var UserSchema = new mongoose.Schema({
     username: {type: String, required: [true, 'username required!']},
     password: String,
-    email: String
+    email: String,
+    //0 normal user
+    //1 verified user
+    //2 professional user
+    //3-9
+    //>=10 admin
+    //>=50 super admin
+    role: {
+        type: Number,
+        default: 0
+    }
 }, {timestamps: true});
 UserSchema.index({username: 1}, {unique: true})
 
@@ -45,9 +55,9 @@ UserSchema.statics = {
 
 //实例方法
 UserSchema.methods = {
-    comparePassword: function(_password, cb){
-        bcrypt.compare(_password, this.password, function(err, isMatched){
-            if(err) return cb(err)
+    comparePassword: function (_password, cb) {
+        bcrypt.compare(_password, this.password, function (err, isMatched) {
+            if (err) return cb(err)
             //没有错误 err = null
             cb(null, isMatched)
         })

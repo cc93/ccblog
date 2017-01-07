@@ -2,14 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../public/css/bootstrap.css">
     <title><%= title %></title>
+    <link rel="stylesheet" href="../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../public/css/base.css">
+    <script src="../public/js/jquery-3.1.1.js"></script>
 </head>
 <body>
 <div class="container">
     <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">User List</div>
+        <!-- 未登录-->
+        <div id="outofSession">
+            <a href="/signin">登录</a>
+            <span>&nbsp;&nbsp;</span>
+            <a href="/signup">注册</a>
+        </div>
+        <!-- /未登录-->
+        <!-- 已经登录-->
+        <div id="inSession">
+            <span>你好！&nbsp;</span>
+            <a id="currentUser">admin</a>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <a id="logout">退出</a>
+        </div>
+        <!-- /已经登录-->
+
         <!-- Table -->
         <table class="table">
             <thead>
@@ -39,4 +57,35 @@
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function(){
+        //更新当前用户
+        function updateCurrentUser() {
+            $.post('/users',function(result, status){
+                var user = result.data
+                // if there is a user in session
+                if(user){
+                    var username = user.username
+                    $('#currentUser').html(username)
+                    $('#outofSession').hide()
+                    $('#inSession').show()
+                }else{
+                    //if there is no user in session
+                    $('#currentUser').html('')
+                    $('#inSession').hide()
+                    $('#outofSession').show()
+                }
+            })
+        }
+
+        updateCurrentUser();
+
+        $('#logout').click(function(){
+            $.get('/users/logout',function (result, status) {
+                updateCurrentUser()
+            })
+        })
+    })
+
+</script>
 </html>

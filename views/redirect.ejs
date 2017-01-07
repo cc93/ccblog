@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="../public/css/bootstrap.css">
+    <link rel="stylesheet" href="../public/css/base.css">
+    <script src="../public/js/jquery-3.1.1.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="alert alert-warning" role="alert">
+        <%= message %>
+        &nbsp;&nbsp;即将跳转到 <%= targetTitle %> 页面
+        &nbsp;&nbsp;<span id="timeLeft">3</span>s
+    </div>
+</div>
+<script>
+    $(function () {
+        var timeLeft = 5;
+        var timeLeftDOM=$('#timeLeft')
+        function countDown() {
+            if(timeLeft === -1) {
+                return timeisUp()
+            }
+            timeLeftDOM.html(timeLeft--)
+            setTimeout(function () {
+                countDown()
+            },1000)
+        }
+        
+        function timeisUp() {
+            window.location.href = '<%- targetHref %>'
+        }
+
+        countDown()
+
+    })
+
+</script>
+</body>
+</html>

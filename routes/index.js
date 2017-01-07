@@ -1,7 +1,7 @@
 var express = require('express');
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        res.render('signup', {title: '科幻世界'});
+        res.render('userlist', {title: '科幻世界'});
     });
     app.use('/signup', require('./signup'));
     app.use('/signin', require('./signin'));

@@ -58,11 +58,11 @@
         $.post('/signin',formData,function(result, status){
             var stat = result.status
             var desc = result.description
-            //注册成功
+            //登录成功
             if(stat === 200){
                 $('#errorMessage').html(desc)
                 //跳转到用户列表页面
-//                window.location.href = '/users'
+                window.location.href = '/users'
                 return
             }else{
                 //用户名不存在 402
