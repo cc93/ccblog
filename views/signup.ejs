@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../public/css/bootstrap.css">
     <title><%= title %></title>
-
+    <link rel="stylesheet" href="../public/css/bootstrap.css">
     <script src="../public/js/jquery-3.1.1.js"></script>
 </head>
 <body>
@@ -69,13 +68,13 @@
         var formData = $(this).serialize()
 //        console.log('formData = ' + formData);
         $.post('/signup',formData,function(result, status){
-            var stat = result.status
-            var desc = result.description
+            var code = result.code
+            var desc = result.desc
             //注册成功
-            if(stat === 200){
+            if(code === 200){
                 $('#errorMessage').html(desc)
-                //跳转到用户列表页面
-                window.location.href = '/users'
+                //跳转到登录页面
+                window.location.href = '/signin'
                 return
             }else{
                 //注册失败，提示错误信息

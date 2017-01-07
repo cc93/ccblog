@@ -22,8 +22,8 @@ router.post('/', checkNotLogin, function (req, res, next) {
         if (err) console.error(err);
         if (!doc) {
             res.send({
-                status: 402,
-                description: '用户名不存在！'
+                code: 402,
+                desc: '用户名不存在！'
             })
             return
         }
@@ -35,13 +35,13 @@ router.post('/', checkNotLogin, function (req, res, next) {
                 //cookie中存有对应站点的session name(key) (明文)， session id(hash值) （暗文）
                 req.session.user = doc
                 res.send({
-                    status: 200,
-                    description: '登录成功！'
+                    code: 200,
+                    desc: '登录成功！'
                 })
             } else {
                 res.send({
-                    status: 403,
-                    description: '密码错误！'
+                    code: 403,
+                    desc: '密码错误！'
                 })
             }
         })

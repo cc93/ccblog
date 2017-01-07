@@ -3,11 +3,11 @@ module.exports = function (app) {
     app.get('/', function (req, res) {
         res.render('userlist', {title: '科幻世界'});
     });
+    app.use('/user', require('./user'));
     app.use('/signup', require('./signup'));
     app.use('/signin', require('./signin'));
     app.use('/signout', require('./signout'));
     app.use('/posts', require('./posts'));
-    app.use('/users', require('./users'));
     //dupont
     //部署前端文件的几种路由方式比较
     //前提：1.前端打包的项目文件放在主机后端项目根目录下的public目录，并且public目录设置为静态文件目录（客户端可以直接访问），见app.js    2.html文件采用相对路径方式引用css，js，img等静态文件（如 href=',/css/base.css'）

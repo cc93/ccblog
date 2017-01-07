@@ -17,7 +17,7 @@ module.exports = {
 
     adminRequired: function (req, res, next) {
         var user = req.session.user
-        if (user.role < 10) {
+        if (user.role < 100) {
             return res.render('redirect',{
                 title:'重定向',
                 message:'您不是管理员，无法访问此页面！',

@@ -61,7 +61,7 @@
     $(document).ready(function(){
         //更新当前用户
         function updateCurrentUser() {
-            $.post('/users',function(result, status){
+            $.post('/user/who',function(result, status){
                 var user = result.data
                 // if there is a user in session
                 if(user){
@@ -78,13 +78,15 @@
             })
         }
 
-        updateCurrentUser();
-
         $('#logout').click(function(){
-            $.get('/users/logout',function (result, status) {
+            $.get('/user/logout',function (result, status) {
                 updateCurrentUser()
             })
         })
+
+        updateCurrentUser();
+
+
     })
 
 </script>

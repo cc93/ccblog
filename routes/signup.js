@@ -23,15 +23,15 @@ router.post('/', checkNotLogin, function (req, res, next) {
         //用户名已存在
         if (doc) {
             res.send({
-                status: 401,
-                description: '用户名已存在!'
+                code: 401,
+                desc: '用户名已存在!'
             })
         } else {
             User.create(_user, function (err, doc) {
                 if (err) return console.error(err);
                 res.send({
-                    status: 200,
-                    description: '注册成功!',
+                    code: 200,
+                    desc: '注册成功!',
                     //data: 新插入数据库的用户信息
                     data: doc
                 })

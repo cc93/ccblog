@@ -56,13 +56,13 @@
         var formData = $(this).serialize()
 //        console.log('formData = ' + formData);
         $.post('/signin',formData,function(result, status){
-            var stat = result.status
-            var desc = result.description
+            var code = result.code
+            var desc = result.desc
             //登录成功
-            if(stat === 200){
+            if(code === 200){
                 $('#errorMessage').html(desc)
                 //跳转到用户列表页面
-                window.location.href = '/users'
+                window.location.href = '/user/list'
                 return
             }else{
                 //用户名不存在 402
