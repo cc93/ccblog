@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include head.ejs %>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="page-header">
+            <h1><%= title %>
+                <small>奇幻 | 魔幻 | 黑科技 | 机器人</small>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="movie-preview col-md-8">
+            <img src="<%= movie.images %>" alt="">
+        </div>
+        <ul class="movie-detail col-md-4">
+            <%
+            var directorsNameArr = []
+            var castsNameArr = []
+            movie.directors.forEach(function (v, i) {
+                directorsNameArr.push(v.name)
+            })
+            movie.casts.forEach(function (v, i) {
+                castsNameArr.push(v.name)
+            })
+            function subString(str, limit) {
+                return str.substring(0, limit) + (str.length > limit ? '...' : '')
+            }
+            var directorsName = subString(directorsNameArr.join(', '), 20)
+            var castsName = subString(castsNameArr.join(', '), 20)
+            %>
+            <li>导演：<%= directorsName %></li>
+            <li>主演：<%= castsName %></li>
+            <li>简介: </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

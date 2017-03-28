@@ -1,10 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<% include head.ejs %>
 <body>
-
+<div class="container">
+    <div class="row">
+        <div class="page-header">
+            <h1><%= title %>
+                <small>奇幻 | 魔幻 | 黑科技 | 机器人</small>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+        </ol>
+    </div>
+    <div class="row">
+        <% for (var i = 0;i < movies.length;i++){ %>
+        <div class="movie col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <a href="/movie/<%= movies[i].id %>">
+                    <img src="<%= movies[i].images %>" alt="..." style="height: 300px;">
+                </a>
+                <div class="caption">
+                    <h4> <%= movies[i].title %></h4>
+                    <%
+                        var directorsNameArr = []
+                        var castsNameArr = []
+                        movies[i].directors.forEach(function (v, i) {
+                            directorsNameArr.push(v.name)
+                        })
+                        movies[i].casts.forEach(function (v, i) {
+                            castsNameArr.push(v.name)
+                        })
+                        function subString(str, limit) {
+                            return str.substring(0, limit) + (str.length > limit ? '...' : '')
+                        }
+                        var directorsName = subString(directorsNameArr.join(', '), 20)
+                        var castsName = subString(castsNameArr.join(', '), 20)
+                    %>
+                    <p>导演：<%= directorsName %></p>
+                    <p>主演：<%= castsName %></p>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
 </body>
 </html>

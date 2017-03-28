@@ -1,8 +1,11 @@
 var express = require('express');
+var moviesInTheaters = require('../json/in_theaters_beijing')
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        res.render('userlist', {title: '科幻世界'});
+        res.redirect('/live')
     });
+    app.use('/movie',require('./movie'))
+    app.use('/live',require('./live'))
     app.use('/user', require('./user'));
     app.use('/signup', require('./signup'));
     app.use('/signin', require('./signin'));

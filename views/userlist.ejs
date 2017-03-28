@@ -34,21 +34,25 @@
             <tr>
                 <th>username</th>
                 <th>email</th>
+                <th>role</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>hnlichong</td>
                 <td>543281892@qq.com</td>
+                <td>0</td>
             </tr>
             <tr>
                 <td>hnlichong1</td>
-                <td>54328189211@qq.com</td>
+                <td>543281892@qq.com</td>
+                <td>0</td>
             </tr>
             <% for(var i = 0;i < users.length;i++){ %>
             <tr>
                 <td><%= users[i].username %></td>
                 <td><%= users[i].email %></td>
+                <td><%= users[i].role %></td>
             </tr>
             <% } %>
             </tbody>

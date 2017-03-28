@@ -13,11 +13,10 @@ router.get('/', checkNotLogin, function (req, res, next) {
 
 // POST /signup 用户注册
 router.post('/', checkNotLogin, function (req, res, next) {
-    // req.params.user -> req.router.user  req.body.user  req.query.user
+    // req.params.user -> 1.req.router.user  2.req.body.user  3.req.query.user
     var _user = req.body
+   _user.role = parseInt(_user.role)
     var username = _user.username
-    var email = _user.email
-    var password = _user.password
     User.findOne({username: username}, function (err, doc) {
         if (err) return console.error(err);
         //用户名已存在

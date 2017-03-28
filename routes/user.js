@@ -30,6 +30,7 @@ router.get('/logout', function (req, res, next) {
 
 /* GET users listing. */
 router.get('/:name', function (req, res, next) {
+    // req.params.user -> 1.req.route.user  2.req.body.user  3.req.query.user
     res.send('hello, name = ' + req.params.name);
 });
 
